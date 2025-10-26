@@ -17,13 +17,21 @@ The Shell Execution MCP Server exposes a tool called `execute-command` that allo
 ./gradlew build
 ```
 
-## Running the Server
+## Configuring the Server
 
-```bash
-./gradlew bootRun
+```json
+{
+  "mcpServers": {
+    "shell-execution": {
+      "command": "java",
+      "args": [
+        "-jar",
+        "<path_to_build_file>"
+      ]
+    }
+  }
+}
 ```
-
-The server will start using Spring Boot's default configuration.
 
 ## Available Tools
 
@@ -42,10 +50,6 @@ Executes a terminal command and returns its output.
 **Returns:**
 - Success: The command output as a string
 - Failure: Error message with exit code or exception details
-
-## Configuration
-
-The server uses Spring Boot's default configuration. You can customize settings by creating an `application.properties` file in `src/main/resources/`.
 
 ## Project Structure
 
