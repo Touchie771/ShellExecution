@@ -11,6 +11,8 @@ import java.util.List;
 @SpringBootApplication
 public class ShellExecutionApplication {
 
+    public static final CommandHistory commandHistory = new CommandHistory();
+
 	public static void main(String[] args) {
 		SpringApplication.run(ShellExecutionApplication.class, args);
 	}

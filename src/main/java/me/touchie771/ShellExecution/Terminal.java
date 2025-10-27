@@ -22,6 +22,7 @@ public class Terminal {
             }
             int exitCode = process.waitFor();
             if (exitCode == 0) {
+                ShellExecutionApplication.commandHistory.addToCommandHistory(String.join(" ", command));
                 return output.toString();
             } else {
                 return "Command not executed successfully, exit code: " + exitCode;
