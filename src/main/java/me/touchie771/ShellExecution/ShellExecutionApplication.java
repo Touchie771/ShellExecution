@@ -19,6 +19,6 @@ public class ShellExecutionApplication {
 
     @Bean
     public List<ToolCallback> tools(Terminal terminal) {
-        return List.of(ToolCallbacks.from(terminal));
+        return List.of(ToolCallbacks.from(terminal, commandHistory));
     }
 }
