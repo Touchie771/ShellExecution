@@ -11,14 +11,12 @@ import java.util.List;
 @SpringBootApplication
 public class ShellExecutionApplication {
 
-    public static final CommandHistory commandHistory = new CommandHistory();
-
 	public static void main(String[] args) {
 		SpringApplication.run(ShellExecutionApplication.class, args);
 	}
 
     @Bean
-    public List<ToolCallback> tools(Terminal terminal) {
+    public List<ToolCallback> tools(Terminal terminal, CommandHistory commandHistory) {
         return List.of(ToolCallbacks.from(terminal, commandHistory));
     }
 }

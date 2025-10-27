@@ -9,6 +9,12 @@ import java.io.InputStreamReader;
 @Service
 public class Terminal {
 
+    private final CommandHistory commandHistory;
+
+    public Terminal(CommandHistory commandHistory) {
+        this.commandHistory = commandHistory;
+    }
+
     @Tool(name = "execute-command", description = "Executes a terminal command and returns the output of it, " +
             "every arg should be a different element of the array, for example: ['cd', '..']")
     public String executeCommand(String[] command) {
@@ -22,7 +28,7 @@ public class Terminal {
             }
             int exitCode = process.waitFor();
             if (exitCode == 0) {
-                ShellExecutionApplication.commandHistory.addToCommandHistory(String.join(" ", command));
+                commandHistory.addToCommandHistory(String.join(" ", command));
                 return output.toString();
             } else {
                 return "Command not executed successfully, exit code: " + exitCode;
