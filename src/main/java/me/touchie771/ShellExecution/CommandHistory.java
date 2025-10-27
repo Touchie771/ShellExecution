@@ -23,11 +23,11 @@ public class CommandHistory {
         return commandHistory;
     }
 
-    @Tool(name = "save-to-file", description = "Saves current command history to a file")
-    public String saveToFile(String absolutePath) {
+    @Tool(name = "save-to-file", description = "Saves current command history to a file. Set overwrite=true to replace an existing file.")
+    public String saveToFile(String absolutePath, boolean overwrite) {
         File file = new File(absolutePath);
-        if (file.exists()) {
-            return "File already exists!";
+        if (file.exists() && !overwrite) {
+            return "File already exists! Pass overwrite=true to replace it.";
         }
         try {
             File parent = file.getParentFile();
@@ -37,12 +37,13 @@ public class CommandHistory {
                     return "Error saving history: could not create directories: " + parent.getAbsolutePath();
                 }
             }
-            try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8))) {
+            // If overwrite is true, FileOutputStream without append will truncate the file; if false and file doesn't exist, it will create it.
+            try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, false), StandardCharsets.UTF_8))) {
                 for (String command : commandHistory) {
                     writer.write(command);
                     writer.newLine();
                 }
-                return "History saved successfully! Saved " + commandHistory.size() + " commands.";
+                return "History saved successfully" + (overwrite && file.exists() ? " (overwritten)" : "") + ". Saved " + commandHistory.size() + " commands.";
             }
         } catch (Exception e) {
             return "Error saving history: " + e.getMessage();
