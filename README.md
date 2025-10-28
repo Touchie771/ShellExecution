@@ -106,6 +106,54 @@ Loads command history from a UTF-8 text file, replacing the current in-memory hi
 **Returns:**
 - Status message including how many commands were loaded
 
+### start-command-async
+
+Starts a command in background and returns a process ID for tracking.
+
+**Parameters:**
+- `command` (String[]): An array of strings where each element represents the command and its arguments.
+
+**Examples:**
+- `["sleep", "60"]` - Sleep for 60 seconds in background
+- `["ping", "google.com"]` - Ping Google continuously in background
+
+**Returns:**
+- Process ID for tracking the background command
+
+### check-command-status
+
+Check the status of a background command. Returns status, runtime, and output if available.
+
+**Parameters:**
+- `processId` (String): The process ID returned by start-command-async.
+
+**Returns:**
+- Current status (RUNNING, COMPLETED_SUCCESS, COMPLETED_ERROR, TERMINATED)
+- Command that was executed
+- Runtime in seconds
+- Exit code (if completed)
+- Output from stdout and stderr (if available)
+
+### stop-command
+
+Stops a background command by its process ID.
+
+**Parameters:**
+- `processId` (String): The process ID to terminate.
+
+**Returns:**
+- Status message indicating if the process was stopped
+
+### list-background-processes
+
+Lists all background processes with their status and details.
+
+**Parameters:**
+- none
+
+**Returns:**
+- List of all tracked background processes with their IDs, commands, status, and runtime
+
 ## Project Structure
 
 ```
@@ -116,7 +164,8 @@ ShellExecution/
 │           └── me/touchie771/ShellExecution/
 │               ├── ShellExecutionApplication.java  # Main application and tool registry
 │               ├── Terminal.java                   # Command execution tool
-│               └── CommandHistory.java             # History tools (get/clear/save/load)
+│               ├── CommandHistory.java             # History tools (get/clear/save/load)
+│               └── AsyncProcessManager.java        # Async process management tools
 ├── build.gradle
 └── README.md
 ```
