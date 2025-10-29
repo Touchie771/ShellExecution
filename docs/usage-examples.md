@@ -36,17 +36,153 @@ execute-command ["git", "push", "origin", "main"]
 
 ### System Information
 ```bash
-# Check system info
+# Check system info using shell commands
 execute-command ["uname", "-a"]
-
-# Check disk usage
 execute-command ["df", "-h"]
-
-# Check memory usage
 execute-command ["free", "-h"]
-
-# List running processes
 execute-command ["ps", "aux"]
+
+# OR use the new OS information tools
+get-system-info
+get-os
+get-os-family
+get-os-version
+get-os-architecture
+```
+
+## OS Information and System Resources
+
+### Basic OS Discovery
+```bash
+# Get comprehensive system overview
+get-system-info
+
+# Get specific OS details
+get-os                    # "Linux", "Windows 10", etc.
+get-os-family            # "Windows", "Linux", "Mac", "Unix", or "Unknown"
+get-os-version           # Version string
+get-os-architecture      # "amd64", "x86_64", etc.
+is-64-bit               # true/false
+```
+
+### Java Runtime Information
+```bash
+# Check Java environment
+get-java-version         # "21.0.2", etc.
+get-java-home           # "/usr/lib/jvm/java-21-openjdk", etc.
+
+# Useful for debugging Java applications
+get-system-property ["java.class.path"]
+get-system-property ["java.library.path"]
+```
+
+### Directory and User Context
+```bash
+# Understand current execution context
+get-working-directory    # Current directory
+get-home-directory       # User home directory
+get-temp-directory       # Temp directory
+get-username            # Current user
+get-shell-type          # Current shell
+
+# Example: Create a user-specific backup path
+get-home-directory
+# Returns: "/home/username"
+# Then use: execute-command ["mkdir", "-p", "/home/username/backups"]
+```
+
+### System Resource Monitoring
+```bash
+# Monitor memory usage
+get-memory-info          # Comprehensive memory details
+get-free-memory         # Available JVM memory
+get-total-memory        # Allocated JVM memory
+get-max-memory          # Maximum JVM memory
+
+# Monitor system performance
+get-available-processors # CPU core count
+get-system-load-average  # System load (last minute)
+
+# Check disk space for specific paths
+get-disk-space-info ["/home"]
+get-disk-space-info ["/var"]
+get-disk-space-info []   # Current directory
+```
+
+### Environment and Properties Access
+```bash
+# Access specific environment variables
+get-environment-variable ["PATH"]
+get-environment-variable ["HOME"]
+get-environment-variable ["JAVA_HOME"]
+
+# Get all environment variables for debugging
+get-all-environment-variables
+
+# Access system properties
+get-system-property ["user.timezone"]
+get-system-property ["file.separator"]
+get-system-property ["line.separator"]
+
+# Get all system properties
+get-all-system-properties
+```
+
+### Practical OS Examples
+
+#### Example 1: System Health Check
+```bash
+# Comprehensive system health assessment
+get-system-info
+get-memory-info
+get-disk-space-info ["/"]
+get-system-load-average
+
+# Sample workflow for monitoring
+if [$(get-system-load-average) > 2.0]; then
+    execute-command ["ps", "aux", "--sort=-%cpu", "|", "head", "-10"]
+fi
+```
+
+#### Example 2: Environment Setup Validation
+```bash
+# Validate development environment
+get-java-version
+get-java-home
+get-environment-variable ["JAVA_HOME"]
+get-environment-variable ["PATH"]
+
+# Check if required tools are available
+execute-command ["which", "git"]
+execute-command ["which", "node"]
+execute-command ["which", "python3"]
+```
+
+#### Example 3: Cross-Platform Scripting
+```bash
+# Detect OS family for platform-specific commands
+get-os-family
+# Returns: "Linux", "Windows", "Mac", etc.
+
+# Then use appropriate commands:
+if [$(get-os-family) == "Linux"]; then
+    execute-command ["apt-get", "update"]
+elif [$(get-os-family) == "Windows"]; then
+    execute-command ["choco", "upgrade", "all"]
+fi
+```
+
+#### Example 4: Resource Planning
+```bash
+# Check available resources before starting heavy operations
+get-available-processors
+get-free-memory
+get-disk-space-info ["/tmp"]
+
+# Make decisions based on available resources
+if [$(get-free-memory) < 1000000000]; then  # Less than 1GB
+    echo "Warning: Low memory available"
+fi
 ```
 
 ## Background Process Management

@@ -61,6 +61,36 @@ java -jar build/libs/ShellExecution-0.0.1-SNAPSHOT.jar
 - **save-to-file** - Save history to file
 - **load-from-file** - Load history from file
 
+### OS Information Tools
+- **get-os** - Get the current OS name
+- **get-os-architecture** - Get the OS architecture
+- **get-os-version** - Get the OS version
+- **get-os-family** - Get the OS family (Windows, Linux, Mac, Unix, or Unknown)
+- **is-64-bit** - Check if the OS is 64-bit
+- **get-shell-type** - Get the current shell type
+- **get-username** - Get the current username
+- **get-java-version** - Get the Java version
+- **get-java-home** - Get the Java home directory
+- **get-working-directory** - Get the current working directory
+- **get-home-directory** - Get the user home directory
+- **get-temp-directory** - Get the temporary directory
+
+### System Resources Tools
+- **get-available-processors** - Get the number of available processors
+- **get-max-memory** - Get the maximum memory the JVM can use (in bytes)
+- **get-total-memory** - Get the total memory currently allocated to the JVM (in bytes)
+- **get-free-memory** - Get the free memory available to the JVM (in bytes)
+- **get-system-load-average** - Get the system load average for the last minute
+- **get-disk-space-info** - Get disk space information for a given path
+- **get-memory-info** - Get comprehensive memory information
+- **get-system-info** - Get comprehensive system information
+
+### Environment & Properties Tools
+- **get-environment-variable** - Get a specific environment variable by name
+- **get-all-environment-variables** - Get all environment variables as a map
+- **get-system-property** - Get a specific system property by name
+- **get-all-system-properties** - Get all system properties as a map
+
 ## Documentation
 
 For detailed documentation, see the [docs/](./docs/) folder:
@@ -76,7 +106,8 @@ ShellExecution/
 │   ├── ShellExecutionApplication.java  # Main application
 │   ├── Terminal.java                   # Command execution
 │   ├── CommandHistory.java             # History management
-│   └── AsyncProcessManager.java        # Background processes
+│   ├── AsyncProcessManager.java        # Background processes
+│   └── Os.java                         # OS information and system resources
 ├── docs/                               # Documentation
 └── build.gradle
 ```

@@ -250,6 +250,443 @@ Exit Code: 0
 ---
 ```
 
+---
+
+## OS Information and System Resources Tools
+
+### get-os
+
+Get the current operating system name.
+
+**Parameters:**
+- None
+
+**Returns:**
+- String containing the OS name (e.g., "Linux", "Windows 10", "macOS")
+
+**Example Usage:**
+```json
+{
+  "command": "get-os"
+}
+```
+
+**Sample Response:**
+```
+Linux
+```
+
+### get-os-architecture
+
+Get the operating system architecture.
+
+**Parameters:**
+- None
+
+**Returns:**
+- String containing the OS architecture (e.g., "amd64", "x86_64", "aarch64")
+
+**Example Usage:**
+```json
+{
+  "command": "get-os-architecture"
+}
+```
+
+### get-os-version
+
+Get the operating system version.
+
+**Parameters:**
+- None
+
+**Returns:**
+- String containing the OS version information
+
+**Example Usage:**
+```json
+{
+  "command": "get-os-version"
+}
+```
+
+### get-os-family
+
+Get the OS family classification.
+
+**Parameters:**
+- None
+
+**Returns:**
+- String: "Windows", "Linux", "Mac", "Unix", or "Unknown"
+
+**Example Usage:**
+```json
+{
+  "command": "get-os-family"
+}
+```
+
+### is-64-bit
+
+Check if the operating system is 64-bit.
+
+**Parameters:**
+- None
+
+**Returns:**
+- Boolean: true if 64-bit, false otherwise
+
+**Example Usage:**
+```json
+{
+  "command": "is-64-bit"
+}
+```
+
+### get-shell-type
+
+Get the current shell type.
+
+**Parameters:**
+- None
+
+**Returns:**
+- String containing the shell path (e.g., "/bin/bash", "/bin/zsh")
+
+**Example Usage:**
+```json
+{
+  "command": "get-shell-type"
+}
+```
+
+### get-username
+
+Get the current username.
+
+**Parameters:**
+- None
+
+**Returns:**
+- String containing the current user's name
+
+**Example Usage:**
+```json
+{
+  "command": "get-username"
+}
+```
+
+### get-java-version
+
+Get the Java version being used.
+
+**Parameters:**
+- None
+
+**Returns:**
+- String containing the Java version (e.g., "21.0.2")
+
+**Example Usage:**
+```json
+{
+  "command": "get-java-version"
+}
+```
+
+### get-java-home
+
+Get the Java home directory.
+
+**Parameters:**
+- None
+
+**Returns:**
+- String containing the Java installation directory path
+
+**Example Usage:**
+```json
+{
+  "command": "get-java-home"
+}
+```
+
+### get-working-directory
+
+Get the current working directory.
+
+**Parameters:**
+- None
+
+**Returns:**
+- String containing the current working directory path
+
+**Example Usage:**
+```json
+{
+  "command": "get-working-directory"
+}
+```
+
+### get-home-directory
+
+Get the user's home directory.
+
+**Parameters:**
+- None
+
+**Returns:**
+- String containing the user home directory path
+
+**Example Usage:**
+```json
+{
+  "command": "get-home-directory"
+}
+```
+
+### get-temp-directory
+
+Get the temporary directory.
+
+**Parameters:**
+- None
+
+**Returns:**
+- String containing the temporary directory path
+
+**Example Usage:**
+```json
+{
+  "command": "get-temp-directory"
+}
+```
+
+### get-available-processors
+
+Get the number of available processor cores.
+
+**Parameters:**
+- None
+
+**Returns:**
+- Integer containing the number of available processors
+
+**Example Usage:**
+```json
+{
+  "command": "get-available-processors"
+}
+```
+
+### get-max-memory
+
+Get the maximum memory the JVM can use.
+
+**Parameters:**
+- None
+
+**Returns:**
+- Long containing maximum memory in bytes
+
+**Example Usage:**
+```json
+{
+  "command": "get-max-memory"
+}
+```
+
+### get-total-memory
+
+Get the total memory currently allocated to the JVM.
+
+**Parameters:**
+- None
+
+**Returns:**
+- Long containing total memory in bytes
+
+**Example Usage:**
+```json
+{
+  "command": "get-total-memory"
+}
+```
+
+### get-free-memory
+
+Get the free memory available to the JVM.
+
+**Parameters:**
+- None
+
+**Returns:**
+- Long containing free memory in bytes
+
+**Example Usage:**
+```json
+{
+  "command": "get-free-memory"
+}
+```
+
+### get-system-load-average
+
+Get the system load average for the last minute.
+
+**Parameters:**
+- None
+
+**Returns:**
+- Double containing the system load average
+
+**Example Usage:**
+```json
+{
+  "command": "get-system-load-average"
+}
+```
+
+### get-disk-space-info
+
+Get disk space information for a given path.
+
+**Parameters:**
+- `path` (String, optional): Directory path to check. Defaults to current directory if not provided.
+
+**Returns:**
+- Map with keys: "totalSpace", "freeSpace", "usableSpace" (all in bytes)
+
+**Example Usage:**
+```json
+{
+  "command": "get-disk-space-info",
+  "arguments": {
+    "path": "/home"
+  }
+}
+```
+
+**Sample Response:**
+```json
+{
+  "totalSpace": 107374182400,
+  "freeSpace": 53687091200,
+  "usableSpace": 53687091200
+}
+```
+
+### get-memory-info
+
+Get comprehensive memory information.
+
+**Parameters:**
+- None
+
+**Returns:**
+- Map containing detailed memory usage information including heap and non-heap memory
+
+**Example Usage:**
+```json
+{
+  "command": "get-memory-info"
+}
+```
+
+### get-system-info
+
+Get comprehensive system information.
+
+**Parameters:**
+- None
+
+**Returns:**
+- Map containing detailed system information including OS details, Java info, and system resources
+
+**Example Usage:**
+```json
+{
+  "command": "get-system-info"
+}
+```
+
+## Environment and Properties Tools
+
+### get-environment-variable
+
+Get a specific environment variable by name.
+
+**Parameters:**
+- `variableName` (String): Name of the environment variable to retrieve
+
+**Returns:**
+- String containing the environment variable value, or null if not found
+
+**Example Usage:**
+```json
+{
+  "command": "get-environment-variable",
+  "arguments": {
+    "variableName": "PATH"
+  }
+}
+```
+
+### get-all-environment-variables
+
+Get all environment variables as a map.
+
+**Parameters:**
+- None
+
+**Returns:**
+- Map containing all environment variables and their values
+
+**Example Usage:**
+```json
+{
+  "command": "get-all-environment-variables"
+}
+```
+
+### get-system-property
+
+Get a specific system property by name.
+
+**Parameters:**
+- `propertyName` (String): Name of the system property to retrieve
+
+**Returns:**
+- String containing the system property value, or null if not found
+
+**Example Usage:**
+```json
+{
+  "command": "get-system-property",
+  "arguments": {
+    "propertyName": "user.timezone"
+  }
+}
+```
+
+### get-all-system-properties
+
+Get all system properties as a map.
+
+**Parameters:**
+- None
+
+**Returns:**
+- Map containing all system properties and their values
+
+**Example Usage:**
+```json
+{
+  "command": "get-all-system-properties"
+}
+```
+
 ## Usage Patterns
 
 ### Basic Command Execution
@@ -262,6 +699,64 @@ get-command-history
 
 # Clear history
 clear-command-history
+```
+
+### OS Information Discovery
+```bash
+# Get basic OS information
+get-os
+get-os-family
+get-os-version
+get-os-architecture
+
+# Check system capabilities
+is-64-bit
+get-available-processors
+
+# Get Java runtime information
+get-java-version
+get-java-home
+```
+
+### System Resource Monitoring
+```bash
+# Monitor memory usage
+get-memory-info
+get-free-memory
+get-total-memory
+get-max-memory
+
+# Monitor system performance
+get-system-load-average
+get-system-info
+
+# Check disk space
+get-disk-space-info ["/home"]
+get-disk-space-info []  # Current directory
+```
+
+### Environment and Properties Access
+```bash
+# Get specific environment variables
+get-environment-variable ["PATH"]
+get-environment-variable ["HOME"]
+
+# Get all environment variables
+get-all-environment-variables
+
+# Get system properties
+get-system-property ["user.timezone"]
+get-all-system-properties
+```
+
+### Directory and User Information
+```bash
+# Get current context
+get-working-directory
+get-home-directory
+get-temp-directory
+get-username
+get-shell-type
 ```
 
 ### Background Process Management
