@@ -16,7 +16,8 @@ public class ShellExecutionApplication {
 	}
 
     @Bean
-    public List<ToolCallback> tools(Terminal terminal, CommandHistory commandHistory, AsyncProcessManager asyncProcessManager, Os os) {
-        return List.of(ToolCallbacks.from(terminal, commandHistory, asyncProcessManager, os));
+    public List<ToolCallback> tools(Terminal terminal, CommandHistory commandHistory, AsyncProcessManager asyncProcessManager, 
+                                   OsInfo osInfo, SystemResources systemResources, EnvironmentTools environmentTools) {
+        return List.of(ToolCallbacks.from(terminal, commandHistory, asyncProcessManager, osInfo, systemResources, environmentTools));
     }
 }
