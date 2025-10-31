@@ -2,6 +2,8 @@
 
 A Model Context Protocol (MCP) server built with Spring Boot that provides shell command execution and command history management tools.
 
+> **⚠️ Deprecated:** This MCP server is deprecated and will no longer receive updates, please use our new MCP server, [AgentMode](https://github.com/Touchie771/AgentMode)
+
 ## Description
 
 The Shell Execution MCP Server exposes tools for interacting with the host shell and managing command history via the MCP interface. Supports both synchronous command execution and asynchronous background process management.
